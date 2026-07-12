@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>🛒 数字产品商店 - PrivacyAI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, sans-serif; background: #0f0f1a; color: #e4e4e7; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+  h1 { font-size: 2.2em; text-align: center; margin-bottom: 8px; color: #f97316; }
+  .subtitle { text-align: center; color: #71717a; margin-bottom: 40px; }
+  .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 40px; }
+  .product { background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 12px; padding: 28px; transition: transform 0.2s, border-color 0.2s; }
+  .product:hover { transform: translateY(-4px); border-color: #f97316; }
+  .product h2 { font-size: 1.2em; color: #fafafa; margin-bottom: 8px; }
+  .product .price { font-size: 2em; color: #22c55e; font-weight: bold; margin-bottom: 16px; }
+  .product .price small { font-size: 0.5em; color: #71717a; }
+  .product ul { list-style: none; margin-bottom: 20px; }
+  .product li { padding: 6px 0; border-bottom: 1px solid #2a2a4a; }
+  .product li:last-child { border-bottom: none; }
+  .product li::before { content: "✅ "; }
+  .cta { display: block; background: #f97316; color: white; text-align: center; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; }
+  .cta:hover { background: #ea580c; }
+  .cta.secondary { background: #27272a; margin-top: 8px; }
+  .contact-section { background: #18181b; border-radius: 12px; padding: 32px; text-align: center; }
+  .contact-section h2 { margin-bottom: 16px; }
+  .contact-section p { color: #71717a; margin-bottom: 20px; }
+  .contact-section a { color: #f97316; }
+  .payment-methods { display: flex; gap: 24px; justify-content: center; margin-top: 40px; padding-top: 32px; border-top: 1px solid #27272a; }
+  .payment-method { text-align: center; color: #71717a; font-size: 0.85em; }
+  .payment-method span { display: block; font-size: 1.5em; margin-bottom: 4px; }
+  .back-link { display: inline-block; color: #71717a; text-decoration: none; margin-bottom: 24px; }
+  .back-link:hover { color: #f97316; }
+  .featured { border-color: #f97316; box-shadow: 0 0 30px rgba(249,115,22,0.1); }
+  .featured .badge { background: #f97316; color: white; font-size: 0.75em; padding: 4px 12px; border-radius: 20px; margin-bottom: 8px; display: inline-block; }
+  footer { text-align: center; margin-top: 60px; padding-top: 24px; border-top: 1px solid #27272a; color: #52525b; font-size: 0.85em; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<a href="https://mi-agent.github.io/ai-tools-guide/" class="back-link">← 返回首页</a>
+
+<h1>🛒 数字产品商店</h1>
+<p class="subtitle">实用的工具、模板和指南，帮你建立副业收入</p>
+
+<div class="products">
+  <div class="product featured">
+    <span class="badge">最受欢迎</span>
+    <h2>🎯 PrivacyAI Tools Bundle</h2>
+    <div class="price">$29 <small>一次性</small></div>
+    <ul>
+      <li>6个本地AI工具（无需API）</li>
+      <li>完整落地页源码</li>
+      <li>商业化指南 + 定价策略</li>
+      <li>联盟营销资源包</li>
+      <li>永久免费更新</li>
+    </ul>
+    <a href="https://gumroad.com" class="cta">🚧 即将上线 Gumroad</a>
+    <a href="https://github.com/mi-agent/ai-tools-guide/issues/new?title=%F0%9F%9B%92%20购买%20PrivacyAI%20Bundle%20-%20%2429" class="cta secondary">📩 或发 Issue 询问</a>
+  </div>
+
+  <div class="product">
+    <h2>🐍 Python副业工具包</h2>
+    <div class="price">$29 <small>一次性</small></div>
+    <ul>
+      <li>任务情报爬虫（5+平台）</li>
+      <li>提案模板（3套）</li>
+      <li>定价策略指南</li>
+      <li>平台接单攻略</li>
+      <li>收入追踪模板</li>
+    </ul>
+    <a href="https://github.com/mi-agent/ai-tools-guide/issues/new?title=%F0%9F%9B%92%20购买%20Python副业工具包%20-%20%2429" class="cta">📩 发 Issue 购买</a>
+  </div>
+
+  <div class="product">
+    <h2>📚 零成本变现知识库</h2>
+    <div class="price">$19 <small>一次性</small></div>
+    <ul>
+      <li>19个文档，7000+行内容</li>
+      <li>10个技能指南</li>
+      <li>4个市场调研报告</li>
+      <li>5个变现手册</li>
+      <li>免费持续更新</li>
+    </ul>
+    <a href="https://github.com/mi-agent/ai-tools-guide/issues/new?title=%F0%9F%9B%92%20购买%20知识库%20-%20%2419" class="cta">📩 发 Issue 购买</a>
+  </div>
+
+  <div class="product">
+    <h2>🔗 联盟营销完整指南</h2>
+    <div class="price">$15 <small>一次性</small></div>
+    <ul>
+      <li>50+联盟项目详细清单</li>
+      <li>从0到1完整攻略</li>
+      <li>佣金追踪方法</li>
+      <li>高转化放置技巧</li>
+      <li>税务合规指南</li>
+    </ul>
+    <a href="https://github.com/mi-agent/ai-tools-guide/issues/new?title=%F0%9F%9B%92%20购买%20联盟营销指南%20-%20%2415" class="cta">📩 发 Issue 购买</a>
+  </div>
+
+  <div class="product">
+    <h2>💬 月度咨询</h2>
+    <div class="price">$99 <small>约45分钟</small></div>
+    <ul>
+      <li>个性化副业规划</li>
+      <li>技能变现方向分析</li>
+      <li>具体问题答疑</li>
+      <li>后续邮件支持</li>
+      <li>优先回复通道</li>
+    </ul>
+    <a href="https://github.com/mi-agent/ai-tools-guide/issues/new?title=%F0%9F%9B%92%20预约咨询%20-%20%2499" class="cta">📅 预约咨询</a>
+  </div>
+</div>
+
+<div class="contact-section">
+  <h2>💬 购买咨询</h2>
+  <p>有任何问题？可以直接在 GitHub 发起 Issue，或者查看 <a href="https://github.com/mi-agent/ai-tools-guide/issues">已有问题</a>。</p>
+  <p style="font-size:0.85em;color:#52525b;">通常24小时内回复</p>
+</div>
+
+<div class="payment-methods">
+  <div class="payment-method"><span>💳</span>PayPal</div>
+  <div class="payment-method"><span>🔒</span>Gumroad</div>
+  <div class="payment-method"><span>🪙</span>Crypto</div>
+  <div class="payment-method"><span>📧</span>自定义</div>
+</div>
+
+<footer>
+<p>🔗 <a href="https://github.com/mi-agent">GitHub</a> | <a href="https://mi-agent.github.io/ai-tools-guide/">首页</a> | <a href="https://mi-agent.github.io/ai-tools-guide/SUPPORT">支持</a></p>
+<p>© 2026 PrivacyAI | 所有产品均为数字下载，售出后不退</p>
+</footer>
+
+</div>
+</body>
+</html>
