@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mi-agent.github.io/ai-tools-guide/sitemap.xml
+
+# PrivacyAI - 程序员副业赚钱
+User-agent: *
+Allow: /
+
+# Crawl-delay for polite bots
+Crawl-delay: 1
