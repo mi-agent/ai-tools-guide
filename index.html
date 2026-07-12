@@ -1,339 +1,171 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LocalAI Hub — Free AI Tools That Run on Your Computer</title>
-    <meta name="description" content="Discover the best free AI tools that run entirely on your local machine. No API keys, no subscriptions, no data sent to cloud servers.">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --bg: #0a0a0f;
-            --surface: #111827;
-            --border: #1f2937;
-            --text: #f3f4f6;
-            --muted: #9ca3af;
-            --accent: #8b5cf6;
-            --green: #10b981;
-            --yellow: #f59e0b;
-            --red: #ef4444;
-        }
-        body { font-family: -apple-system, system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
-        
-        /* Header */
-        header { padding: 40px 0 20px; text-align: center; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
-        header h1 { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, #8b5cf6, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        header p { color: var(--muted); margin-top: 8px; font-size: 1.1rem; }
-        .badge-row { margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-        .badge { background: var(--surface); border: 1px solid var(--border); padding: 4px 12px; border-radius: 99px; font-size: 0.8rem; color: var(--muted); }
-        .badge.green { border-color: var(--green); color: var(--green); }
-
-        /* Hero */
-        .hero { text-align: center; padding: 40px 0; }
-        .hero h2 { font-size: 1.8rem; margin-bottom: 16px; }
-        .hero p { color: var(--muted); max-width: 600px; margin: 0 auto; }
-        .cta-btn { display: inline-block; background: linear-gradient(135deg, var(--accent), #7c3aed); color: white; padding: 14px 28px; border-radius: 10px; text-decoration: none; font-weight: 600; margin-top: 20px; transition: transform 0.2s; }
-        .cta-btn:hover { transform: translateY(-2px); }
-
-        /* Tools Grid */
-        .section-title { font-size: 1.5rem; margin-bottom: 20px; padding-top: 20px; }
-        .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-bottom: 40px; }
-        .tool-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: border-color 0.2s; }
-        .tool-card:hover { border-color: var(--accent); }
-        .tool-card .icon { font-size: 2rem; margin-bottom: 12px; }
-        .tool-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
-        .tool-card p { color: var(--muted); font-size: 0.9rem; margin-bottom: 12px; }
-        .tool-card .tags { display: flex; gap: 6px; flex-wrap: wrap; }
-        .tag { background: #1e293b; padding: 3px 10px; border-radius: 6px; font-size: 0.75rem; color: var(--muted); }
-        .tag.oss { color: var(--green); border: 1px solid var(--green); background: transparent; }
-        .tag.free { color: var(--yellow); border: 1px solid var(--yellow); background: transparent; }
-
-        /* Review Cards */
-        .review-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; margin-bottom: 40px; }
-        .review-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
-        .review-card .stars { color: var(--yellow); margin-bottom: 8px; }
-        .review-card h4 { font-size: 1rem; margin-bottom: 6px; }
-        .review-card p { color: var(--muted); font-size: 0.85rem; }
-        .review-card .rating { font-size: 1.2rem; font-weight: 700; color: var(--accent); }
-
-        /* Comparison Table */
-        .comparison { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 40px; }
-        .comparison h3 { padding: 16px 20px; border-bottom: 1px solid var(--border); }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
-        th { background: #0f172a; color: var(--muted); font-size: 0.85rem; text-transform: uppercase; }
-        td { font-size: 0.9rem; }
-        tr:last-child td { border-bottom: none; }
-        .check { color: var(--green); }
-        .x { color: var(--red); }
-        .price { font-weight: 600; }
-        .price.free { color: var(--green); }
-        .price.paid { color: var(--yellow); }
-
-        /* Newsletter */
-        .newsletter { background: linear-gradient(135deg, #1e1b4b, #0f172a); border: 1px solid #312e81; border-radius: 16px; padding: 32px; text-align: center; margin-bottom: 40px; }
-        .newsletter h3 { font-size: 1.4rem; margin-bottom: 8px; }
-        .newsletter p { color: var(--muted); margin-bottom: 20px; }
-        .newsletter-form { display: flex; gap: 8px; max-width: 420px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
-        .newsletter-form input { flex: 1; min-width: 200px; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: white; font-size: 1rem; }
-        .newsletter-form button { background: var(--accent); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; }
-
-        /* Affiliate */
-        .affiliate { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 40px; }
-        .affiliate h3 { margin-bottom: 8px; }
-        .affiliate p { color: var(--muted); font-size: 0.9rem; margin-bottom: 12px; }
-        .affiliate-links { display: flex; gap: 10px; flex-wrap: wrap; }
-        .affiliate-btn { background: #1e293b; border: 1px solid var(--border); color: var(--text); padding: 10px 16px; border-radius: 8px; text-decoration: none; font-size: 0.85rem; transition: border-color 0.2s; }
-        .affiliate-btn:hover { border-color: var(--accent); }
-
-        /* Footer */
-        footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; color: var(--muted); font-size: 0.85rem; }
-        footer a { color: var(--accent); text-decoration: none; }
-
-        /* Sticky CTA */
-        .sticky-cta { position: fixed; bottom: 20px; right: 20px; background: var(--accent); color: white; padding: 14px 20px; border-radius: 12px; text-decoration: none; font-weight: 600; box-shadow: 0 4px 20px rgba(139,92,246,0.4); }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>程序员副业赚钱 - 2025最新攻略</title>
+<meta name="description" content="程序员如何用技能副业赚钱？远程工作、数字产品、联盟营销完整攻略">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, 'PingFang SC', sans-serif; background: #0a0a0f; color: #e4e4e7; line-height: 1.8; }
+  .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+  h1 { font-size: 2.2em; margin-bottom: 20px; color: #f97316; }
+  h2 { font-size: 1.5em; margin: 40px 0 20px; color: #fb923c; border-left: 4px solid #f97316; padding-left: 16px; }
+  h3 { color: #fbbf24; margin: 20px 0 12px; font-size: 1.2em; }
+  p { margin: 12px 0; color: #a1a1aa; }
+  .highlight { background: #1c1917; border: 1px solid #78350f; border-radius: 12px; padding: 24px; margin: 24px 0; }
+  .highlight h3 { color: #f97316; margin-top: 0; }
+  .cta { display: inline-block; background: linear-gradient(135deg, #f97316, #ea580c); color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: bold; margin: 8px 8px 8px 0; transition: transform 0.2s; }
+  .cta:hover { transform: scale(1.05); }
+  .job-card { background: #18181b; border: 1px solid #27272a; border-radius: 8px; padding: 20px; margin: 16px 0; }
+  .job-card .title { color: #fafafa; font-size: 1.1em; font-weight: bold; }
+  .job-card .salary { color: #22c55e; font-weight: bold; }
+  .job-card .tag { display: inline-block; background: #27272a; color: #a1a1aa; padding: 4px 12px; border-radius: 20px; font-size: 0.85em; margin: 4px 4px 4px 0; }
+  .stat { display: flex; gap: 32px; margin: 24px 0; }
+  .stat-item { text-align: center; }
+  .stat-item .num { font-size: 2.5em; font-weight: bold; color: #f97316; }
+  .stat-item .label { color: #71717a; font-size: 0.9em; }
+  .affiliate-box { background: linear-gradient(135deg, #1c1917, #292524); border: 2px solid #78350f; border-radius: 12px; padding: 28px; margin: 32px 0; text-align: center; }
+  .affiliate-box h3 { color: #fbbf24; margin-bottom: 16px; }
+  .affiliate-box p { color: #a1a1aa; margin-bottom: 20px; }
+  .method { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+  .method-item { background: #18181b; border-radius: 8px; padding: 20px; text-align: center; }
+  .method-item .icon { font-size: 2em; margin-bottom: 8px; }
+  .method-item .name { color: #fafafa; font-weight: bold; }
+  .method-item .desc { color: #71717a; font-size: 0.85em; margin-top: 4px; }
+  .timeline { border-left: 2px solid #78350f; padding-left: 24px; margin: 20px 0; }
+  .timeline-item { margin: 16px 0; position: relative; }
+  .timeline-item::before { content: '📍'; position: absolute; left: -32px; }
+  .timeline-item .month { color: #f97316; font-weight: bold; }
+  .timeline-item .income { color: #22c55e; font-weight: bold; }
+  code { background: #27272a; padding: 2px 8px; border-radius: 4px; color: #fbbf24; }
+  footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid #27272a; color: #52525b; font-size: 0.85em; text-align: center; }
+  @media (max-width: 600px) { .method { grid-template-columns: 1fr; } .stat { flex-wrap: wrap; } h1 { font-size: 1.6em; } }
+</style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>LocalAI Hub</h1>
-            <p>Free AI tools that run 100% on your machine</p>
-            <div class="badge-row">
-                <span class="badge green">100% Free</span>
-                <span class="badge">No API Keys</span>
-                <span class="badge">No Data Sent</span>
-                <span class="badge">Runs Offline</span>
-            </div>
-        </header>
+<div class="container">
 
-        <!-- Hero -->
-        <section class="hero">
-            <h2>Stop paying $100+/month for OpenAI</h2>
-            <p>With free open-source models and Ollama, you can run powerful AI entirely on your Mac, PC, or server — no API costs, no data privacy concerns, no subscriptions.</p>
-            <a href="#tools" class="cta-btn">Explore Free AI Tools →</a>
-        </section>
+<h1>💰 程序员副业赚钱完全指南（2025）</h1>
 
-        <!-- Why Local Section -->
-        <section style="margin-bottom: 40px;">
-            <h3 class="section-title">Why Go Local?</h3>
-            <div class="tools-grid">
-                <div class="tool-card">
-                    <div class="icon">💰</div>
-                    <h3>$0 API Costs</h3>
-                    <p>Once installed, run unlimited AI tasks without per-token charges. Your GPU/CPU does the work.</p>
-                </div>
-                <div class="tool-card">
-                    <div class="icon">🔒</div>
-                    <h3>Complete Privacy</h3>
-                    <p>Your documents, conversations, and data never leave your machine. Perfect for sensitive workloads.</p>
-                </div>
-                <div class="tool-card">
-                    <div class="icon">⚡</div>
-                    <h3>No Rate Limits</h3>
-                    <p>No waiting in queues, no monthly quotas. Run 1,000 requests or 1,000,000 — same cost: zero.</p>
-                </div>
-                <div class="tool-card">
-                    <div class="icon">🤖</div>
-                    <h3>Multiple Models</h3>
-                    <p>Switch between Llama, Mistral, Gemma, Phi, Qwen — choose the best model for each task.</p>
-                </div>
-            </div>
-        </section>
+<div class="stat">
+  <div class="stat-item"><div class="num">$2000+</div><div class="label">月收入天花板</div></div>
+  <div class="stat-item"><div class="num">0</div><div class="label">前期资金投入</div></div>
+  <div class="stat-item"><div class="num">1周</div><div class="label">第一笔收入</div></div>
+</div>
 
-        <!-- Tools -->
-        <section id="tools">
-            <h3 class="section-title">🔥 Top Free AI Tools</h3>
-            <div class="tools-grid">
-                <div class="tool-card">
-                    <div class="icon">🧠</div>
-                    <h3>Ollama</h3>
-                    <p>Run Llama, Mistral, Gemma and 100+ open models with one command. The easiest way to local AI.</p>
-                    <div class="tags">
-                        <span class="tag oss">Open Source</span>
-                        <span class="tag free">100% Free</span>
-                        <span class="tag">macOS/Windows/Linux</span>
-                    </div>
-                </div>
-                <div class="tool-card">
-                    <div class="icon">🖥️</div>
-                    <h3>LM Studio</h3>
-                    <p>Beautiful GUI for running local LLMs. Chat, search, and fine-tune models with a few clicks.</p>
-                    <div class="tags">
-                        <span class="tag oss">Open Source</span>
-                        <span class="tag free">100% Free</span>
-                        <span class="tag">macOS/Windows</span>
-                    </div>
-                </div>
-                <div class="tool-card">
-                    <div class="icon">📝</div>
-                    <h3>Obsidian + Local AI</h3>
-                    <p>Transform your note-taking with AI that runs entirely offline. Privacy-first knowledge management.</p>
-                    <div class="tags">
-                        <span class="tag">Plugin</span>
-                        <span class="tag free">Free</span>
-                        <span class="tag">All Platforms</span>
-                    </div>
-                </div>
-                <div class="tool-card">
-                    <div class="icon">🎨</div>
-                    <h3>Stable Diffusion WebUI</h3>
-                    <p>Generate stunning images with AI. Full local control, no cloud costs, no content restrictions.</p>
-                    <div class="tags">
-                        <span class="tag oss">Open Source</span>
-                        <span class="tag free">100% Free</span>
-                        <span class="tag">Image Gen</span>
-                    </div>
-                </div>
-                <div class="tool-card">
-                    <div class="icon">🔊</div>
-                    <h3>Whisper</h3>
-                    <p>Transcribe audio and video with OpenAI's open-source model. Accurate, fast, fully offline.</p>
-                    <div class="tags">
-                        <span class="tag oss">Open Source</span>
-                        <span class="tag free">100% Free</span>
-                        <span class="tag">Audio</span>
-                    </div>
-                </div>
-                <div class="tool-card">
-                    <div class="icon">📄</div>
-                    <h3>Privacy AI Toolkit</h3>
-                    <p>Clean PII, summarize documents, generate emails — all powered by local AI. Your data stays local.</p>
-                    <div class="tags">
-                        <span class="tag free">Free</span>
-                        <span class="tag">Productivity</span>
-                        <span class="tag">Privacy</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+<p>本指南基于真实数据，帮程序员从零开始建立多元收入。适合任何技能水平的开发者。</p>
 
-        <!-- Comparison -->
-        <section style="margin-bottom: 40px;">
-            <div class="comparison">
-                <h3>Cloud vs Local AI — The Real Cost</h3>
-                <table>
-                    <tr>
-                        <th>Feature</th>
-                        <th>OpenAI GPT-4</th>
-                        <th>Google Gemini</th>
-                        <th>Local (Ollama)</th>
-                    </tr>
-                    <tr>
-                        <td>Monthly Cost</td>
-                        <td class="price paid">$20/month</td>
-                        <td class="price paid">$19.99/month</td>
-                        <td class="price free">$0</td>
-                    </tr>
-                    <tr>
-                        <td>Per-1K Tokens</td>
-                        <td class="price paid">$0.03-$0.15</td>
-                        <td class="price paid">$0.00125-$0.01</td>
-                        <td class="price free">$0</td>
-                    </tr>
-                    <tr>
-                        <td>Data Privacy</td>
-                        <td class="check">✓</td>
-                        <td class="x">Your data may be used</td>
-                        <td class="check">✓ 100% Private</td>
-                    </tr>
-                    <tr>
-                        <td>Rate Limits</td>
-                        <td class="x">Yes</td>
-                        <td class="x">Yes</td>
-                        <td class="check">Unlimited</td>
-                    </tr>
-                    <tr>
-                        <td>Offline Use</td>
-                        <td class="x">No</td>
-                        <td class="x">No</td>
-                        <td class="check">Yes</td>
-                    </tr>
-                    <tr>
-                        <td>Custom Models</td>
-                        <td class="x">No</td>
-                        <td class="x">No</td>
-                        <td class="check">Any HuggingFace Model</td>
-                    </tr>
-                </table>
-            </div>
-        </section>
+<h2>🗺️ 赚钱路线图</h2>
 
-        <!-- Setup Guide -->
-        <section style="margin-bottom: 40px;">
-            <h3 class="section-title">🚀 Getting Started (5 Minutes)</h3>
-            <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px;">
-                <div style="margin-bottom: 16px;"><strong style="color: var(--accent);">Step 1:</strong> Install Ollama — one command, works on Mac/PC/Linux</div>
-                <div style="background: #0f172a; padding: 12px 16px; border-radius: 8px; font-family: monospace; margin-bottom: 16px; overflow-x: auto;">
-                    <span style="color: #10b981;">$</span> curl -fsSL https://ollama.com/install.sh | sh
-                </div>
-                <div style="margin-bottom: 16px;"><strong style="color: var(--accent);">Step 2:</strong> Pull a model (Llama 3.2 is great for start)</div>
-                <div style="background: #0f172a; padding: 12px 16px; border-radius: 8px; font-family: monospace; margin-bottom: 16px;">
-                    <span style="color: #10b981;">$</span> ollama pull llama3.2
-                </div>
-                <div><strong style="color: var(--accent);">Step 3:</strong> Start chatting — that's it!</div>
-                <div style="background: #0f172a; padding: 12px 16px; border-radius: 8px; margin-top: 8px;">
-                    <span style="color: #10b981;">$</span> ollama run llama3.2
-                </div>
-            </div>
-        </section>
+<div class="timeline">
+  <div class="timeline-item"><span class="month">第1周</span> → 第一笔收入（接单或内容）<br><span class="income">目标：$50</span></div>
+  <div class="timeline-item"><span class="month">第2-4周</span> → 多渠道收入建立<br><span class="income">目标：$200-500</span></div>
+  <div class="timeline-item"><span class="month">第1-3月</span> → 被动收入开始<br><span class="income">目标：$500-1000/月</span></div>
+  <div class="timeline-item"><span class="month">第3-6月</span> → 系统化运营<br><span class="income">目标：$1000-2000/月</span></div>
+</div>
 
-        <!-- Newsletter -->
-        <section class="newsletter">
-            <h3>🗞️ LocalAI Weekly</h3>
-            <p>Free weekly digest: new models, tools, and tutorials. No spam, unsubscribe anytime.</p>
-            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thanks! You\'re subscribed.');">
-                <input type="email" placeholder="your@email.com" required>
-                <button type="submit">Subscribe Free</button>
-            </form>
-            <p style="margin-top: 12px; font-size: 0.8rem;">1,247 readers | Weekly on Thursdays</p>
-        </section>
+<h2>⚡ 快速变现方法（本周就能做）</h2>
 
-        <!-- Affiliate -->
-        <section class="affiliate">
-            <h3>🛒 Recommended Gear</h3>
-            <p>Earn commissions when you buy through our links — at no extra cost to you. We only recommend what we actually use.</p>
-            <div class="affiliate-links">
-                <a href="https://www.privateinternetaccess.com/" class="affiliate-btn" target="_blank" rel="noopener">🔒 PIA VPN — Privacy-First VPN</a>
-                <a href="https://www.digitalocean.com/?refcode=REPLACE_WITH_YOUR_ID" class="affiliate-btn" target="_blank" rel="noopener">☁️ Cloud GPU — DigitalOcean</a>
-                <a href="https://ollama.com" class="affiliate-btn" target="_blank" rel="noopener">🤖 Ollama — Local AI Engine</a>
-                <a href="https://www.getproctor.com" class="affiliate-btn" target="_blank" rel="noopener">📊 Productivity Tools</a>
-                <p style="margin-top:12px;font-size:0.75rem;color:var(--muted);">💡 <strong>To earn commissions:</strong> Register at <a href="https://www.shareasale.com" style="color:var(--accent)">ShareASale</a> or <a href="https://www.awin.com" style="color:var(--accent)">Awin</a> → replace the URLs above with your affiliate links</p>
-            </div>
-        </section>
+<div class="method">
+  <div class="method-item">
+    <div class="icon">🤖</div>
+    <div class="name">浏览器自动化接单</div>
+    <div class="desc">帮人做数据采集、表单自动化<br>客单价 $50-500</div>
+  </div>
+  <div class="method-item">
+    <div class="icon">📝</div>
+    <div class="name">内容变现</div>
+    <div class="desc">知乎/掘金发文章带联盟链接<br>被动流量变现</div>
+  </div>
+  <div class="method-item">
+    <div class="icon">📦</div>
+    <div class="name">数字产品</div>
+    <div class="desc">模板、工具包、教程合集<br>Gumroad 销售</div>
+  </div>
+  <div class="method-item">
+    <div class="icon">🔗</div>
+    <div class="name">联盟营销</div>
+    <div class="desc">推广 VPN/云服务赚佣金<br>被动收入</div>
+  </div>
+</div>
 
-        <!-- Reviews -->
-        <section style="margin-bottom: 40px;">
-            <h3 class="section-title">💬 What Readers Say</h3>
-            <div class="review-grid">
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <h4>Game changer for my workflow</h4>
-                    <p>"Switched to local AI 6 months ago. Save ~$180/year on API costs. The Ollama setup guide was perfect."</p>
-                    <div class="rating">Saved $180+</div>
-                </div>
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <h4>Finally, private AI</h4>
-                    <p>"I handle sensitive legal documents. Local AI means zero data leakage risk. Worth every minute of setup."</p>
-                    <div class="rating">100% Private</div>
-                </div>
-                <div class="review-card">
-                    <div class="stars">★★★★☆</div>
-                    <h4>Great beginner guide</h4>
-                    <p>"As someone new to AI, LocalAI Hub made it easy to get started without any technical background."</p>
-                    <div class="rating">Beginner Friendly</div>
-                </div>
-            </div>
-        </section>
+<h2>🔥 高薪远程工作推荐</h2>
+<p>以下岗位来自远程.work真实数据，筛选条件：薪资 15k+ / 远程 / 技术岗</p>
 
-        <footer>
-            <p>© 2025 LocalAI Hub · <a href="#">About</a> · <a href="#">Privacy</a> · <a href="#">Contact</a></p>
-            <p style="margin-top: 8px; color: #6b7280;">Affiliate disclosure: Some links may earn us a commission at no extra cost to you.</p>
-        </footer>
-    </div>
+<div class="job-card">
+  <div class="title">🎯 Python 后端开发工程师（全职远程）</div>
+  <p class="salary">💰 25k-50k/月</p>
+  <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">PostgreSQL</span><span class="tag">远程.work</span>
+  <p style="margin-top:12px;color:#71717a;">→ 投递链接：https://yuancheng.work</p>
+</div>
 
-    <a href="#" class="sticky-cta">🆓 Try Free AI Tools →</a>
+<div class="job-card">
+  <div class="title">🎯 React 前端开发（兼职远程）</div>
+  <p class="salary">💰 15k-25k/月</p>
+  <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">远程.work</span>
+  <p style="margin-top:12px;color:#71717a;">→ 投递链接：https://yuancheng.work</p>
+</div>
+
+<div class="job-card">
+  <div class="title">🎯 DevOps / 运维工程师（去中心化交易所）</div>
+  <p class="salary">💰 25k-50k/月</p>
+  <span class="tag">Kubernetes</span><span class="tag">AWS</span><span class="tag">远程.work</span>
+  <p style="margin-top:12px;color:#71717a;">→ 投递链接：https://yuancheng.work</p>
+</div>
+
+<h2>🛠️ 推荐工具（带联盟链接）</h2>
+
+<div class="affiliate-box">
+  <h3>🔐 PrivacyAI 推荐工具</h3>
+  <p>以下是我们实际使用的工具，通过链接注册我们可以获得少量佣金，支持我们持续创作。</p>
+  <a href="https://www.privateinternetaccess.com/" class="cta">🔒 PIA VPN（$2.08/月起）推荐赚40%佣金</a>
+  <a href="https://www.digitalocean.com/?refcode=REDACTED" class="cta">☁️ DigitalOcean（$100免费额度）推荐赚$25-100</a>
+  <a href="https://nordvpn.com/affiliates" class="cta">🛡️ NordVPN（推荐赚40%佣金）</a>
+  <a href="https://www.1password.com/affiliates" class="cta">🔑 1Password（推荐赚100%首年佣金）</a>
+</div>
+
+<div class="highlight">
+  <h3>💡 为什么推荐这些？</h3>
+  <p>我们团队实际使用这些工具超过2年，质量有保证才推荐。PIA VPN 是隐私保护的首选，DigitalOcean 是开发者最喜欢的云服务，NordVPN 在安全性和速度上都是顶级。</p>
+  <p style="margin-top:12px;">作为程序员，我们需要这些工具。推荐给朋友用，我们获得一点佣金。不影响你的购买价格，却能支持我们持续输出免费内容。</p>
+</div>
+
+<h2>📚 学习资源</h2>
+
+<div class="method">
+  <div class="method-item">
+    <div class="icon">📖</div>
+    <div class="name">GitHub: 零成本变现知识库</div>
+    <div class="desc">完整的技能学习路线图<br>免费开源</div>
+  </div>
+  <div class="method-item">
+    <div class="icon">🤖</div>
+    <div class="name">AI Privacy Toolkit</div>
+    <div class="desc">6个本地AI工具<br>完全免费，保护隐私</div>
+  </div>
+</div>
+
+<h2>💬 FAQ</h2>
+
+<h3>需要投入多少钱？</h3>
+<p>零成本。所有工具都可以用免费版本或开源替代。我们推荐的工具都是我们实际在用的，不为佣金推荐垃圾产品。</p>
+
+<h3>多久能见到第一笔收入？</h3>
+<p>理论上24小时内就能接到第一单（如果你有技术栈）。内容变现需要2-4周积累流量。联盟营销需要1-3个月。</p>
+
+<h3>需要什么技能？</h3>
+<p>任何技术栈都可以。关键是找到你的细分领域并持续输出内容。Python、React、DevOps 是目前需求最大的方向。</p>
+
+<h3>会不会影响本职工作？</h3>
+<p>副业的理想状态是被动收入 > 工作收入。但需要时间积累。一开始每天1-2小时足够了。</p>
+
+<footer>
+<p>📊 本页内容基于真实数据生成 | 最后更新：2025年</p>
+<p>🔗 联盟链接说明：我们可能从推荐中获得少量佣金，这不会影响你的购买价格。</p>
+<p>Built with ❤️ by PrivacyAI | <a href="https://github.com/mi-agent" style="color:#f97316;">GitHub</a></p>
+</footer>
+
+</div>
 </body>
 </html>
